@@ -2,6 +2,27 @@
 logs(){
 	echo "$(date): $1" >> logs
 }
+status(){
+	sudo ufw status
+        logs "Переглянуто статус"
+}
+open(){
+	read -p "Введіть порт: " port
+        sudo ufw allow "$port"
+        echo "Порт $port відкрито"
+        logs "Порт $port відкрито"
+}
+close(){
+	read -p "Введіть порт: " port
+        sudo ufw deny "$port"
+        echo "Порт $port закрито"
+        logs "Порт $port закрито"
+}
+reload(){
+ 	sudo ufw reload
+        echo "фаєрвол перезапущено"
+        logs "фаєрвол перезапущено"
+}
 while true; do 
 echo "МЕНЮ"
 echo "1) Статус фаєрвола"
@@ -12,25 +33,16 @@ echo "5) Вийти"
 read -p "Введіть команду: " d
 case $d in
 1)
-	sudo ufw status
-	logs "Переглянуто статус"
+	status
 	;;
 2)
-	read -p "Введіть порт: " port
-	sudo ufw allow "$port"
-	echo "Порт $port відкрито"
-	logs "Порт $port відкрито"
+	open
 	;;
 3)
-	read -p "Введіть порт: " port
-        sudo ufw deny "$port"
-	echo "Порт $port закрито"
-	logs "Порт $port закрито"
+	close
 	;;
 4)
-	sudo ufw reload
-	echo "фаєрвол перезапущено"
-	logs "фаєрвол перезапущено"
+	reload
 	;;
 5)
 	echo "До побачення"
