@@ -10,5 +10,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Hello World
-        run: echo "CI/CD працює!"
+      - name: Test bash
+        run: bash -n bash.sh
