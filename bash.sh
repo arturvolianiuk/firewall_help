@@ -2,6 +2,9 @@
 logs(){
 	echo "$(date): $1" >> logs
 }
+log() {
+	cat logs
+}
 status(){
 	sudo ufw status
         logs "Переглянуто статус"
@@ -29,7 +32,8 @@ echo "1) Статус фаєрвола"
 echo "2) Відкрити порт"
 echo "3) Закрити порт"
 echo "4) Перезапустити"
-echo "5) Вийти"
+echo "5) Переглянути логи"
+echo "6) Вийти"
 read -p "Введіть команду: " d
 case $d in
 1)
@@ -45,6 +49,9 @@ case $d in
 	reload
 	;;
 5)
+	log
+	;;
+6)
 	echo "До побачення"
 	break
 	;;
